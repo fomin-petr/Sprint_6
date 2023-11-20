@@ -1,12 +1,8 @@
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from pages.base_page import BasePage
+from locators.order_status_page_locators import OrderStatusPageLocators
 
 
-class OrderStatusPage:
-    scooter_logo_button = [By.XPATH, '//img[@alt="Scooter"]/parent::a']
-
-    def __init__(self, driver):
-        self.driver = driver
+class OrderStatusPage(BasePage):
 
     def click_scooter_logo_button(self):
-        self.driver.find_element(*self.scooter_logo_button).click()
+        self.click_on_element(OrderStatusPageLocators.SCOOTER_LOGO_BUTTON)

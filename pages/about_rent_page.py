@@ -1,57 +1,44 @@
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from locators.about_rent_locators import AboutRentLocators
+from pages.base_page import BasePage
 
 
-class AboutRent:
-    date_field = [By.XPATH, '//input[ contains(@placeholder, "Когда") ]']
-    pick_date = [By.XPATH, '//div[ contains(@class, "react-datepicker__day--0{}") ]']
-    rent_term = [By.XPATH, '//div[ contains(text(), "Срок") ]']
-    pick_term = [By.XPATH, '//div[ @class="Dropdown-option" and text()="{}" ]' ]
-    pick_color = [By.ID, '{}']
-    comment_field = [By.XPATH, '//input[ contains(@placeholder, "Комментарий") ]']
-    order_button = [By.XPATH, '//div[ contains(@class, "Order_Buttons")]/button[ text()="Заказать" ]']
-    yes_order_button = [By.XPATH, '//button[ text()="Да" ]']
-    order_confirmation_window = [By.XPATH, '//div[ contains(text(), "Заказ оформлен") ]']
-    check_status_button = [By.XPATH, '//button[ text()="Посмотреть статус" ]']
-
-    def __init__(self, driver):
-        self.driver = driver
+class AboutRent(BasePage):
 
     def select_date(self, when_date):
-        self.driver.find_element(*self.date_field).click()
-        method, locator = self.pick_date
+        self.click_on_element(AboutRentLocators.DATE_FIELD)
+        method, locator = AboutRentLocators.PICK_DATE
         locator = locator.format(when_date)
-        self.driver.find_element(method, locator).click()
+        element = [method, locator]
+        self.click_on_element(element)
 
     def select_term(self, term):
-        method, locator = self.pick_term
+        method, locator = AboutRentLocators.PICK_TERM
         locator = locator.format(term)
-        self.driver.find_element(*self.rent_term).click()
-        self.driver.find_element(method, locator).click()
+        element = [method, locator]
+        self.click_on_element(AboutRentLocators.RENT_TERM)
+        self.click_on_element(element)
 
     def select_color(self, color):
-        method, locator = self.pick_color
+        method, locator = AboutRentLocators.PICK_COLOR
         locator = locator.format(color)
-        self.driver.find_element(method, locator).click()
+        element = [method, locator]
+        self.click_on_element(element)
 
     def input_comment(self, comment):
-        self.driver.find_element(*self.comment_field).send_keys(comment)
+        self.input_in_field(AboutRentLocators.COMMENT_FIELD, comment)
 
     def click_next_button(self):
-        self.driver.find_element(*self.order_button).click()
+        self.click_on_element(AboutRentLocators.ORDER_BUTTON)
 
     def click_yes_order_button(self):
-        self.driver.find_element(*self.yes_order_button).click()
+        self.click_on_element(AboutRentLocators.YES_ORDER_BUTTON)
 
     def check_order_confirmation_window(self):
-        try:
-            self.driver.find_element(*self.order_confirmation_window)
-        except NoSuchElementException:
-            return False
-        return True
+        return self.check_element_present(AboutRentLocators.ORDER_CONFIRMATION_WINDOW)
 
     def click_check_status_button(self):
-        self.driver.find_element(*self.check_status_button).click()
+        self.click_on_element(AboutRentLocators.CHECK_STATUS_BUTTON)
+
     def fill_out_form(self, when_date, term, color, comment):
         self.select_date(when_date)
         self.select_term(term)

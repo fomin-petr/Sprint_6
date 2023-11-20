@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
+from locators.order_first_page_locators import OrderFirstPageLocators
 
 
-class OrderFirstPage:
+class OrderFirstPage(BasePage):
     name_field = [By.XPATH, '//input[ @placeholder="* Имя"]']
     surname_field = [By.XPATH, '//input[ @placeholder="* Фамилия"]']
     address_field = [By.XPATH, '//input[ contains(@placeholder, "Адрес") ]']
@@ -12,29 +12,27 @@ class OrderFirstPage:
     order_next_button = [By.XPATH, '//button[ contains(text(), "Далее") ]']
     metro_selection_item = [By.XPATH, '//li[ @class ="select-search__row"]//div[text()="{}"]']
 
-    def __init__(self, driver):
-        self.driver = driver
-
     def input_name(self, name):
-        self.driver.find_element(*self.name_field).send_keys(name)
+        self.input_in_field(OrderFirstPageLocators.NAME_FIELD, name)
 
     def input_surname(self, surname):
-        self.driver.find_element(*self.surname_field).send_keys(surname)
+        self.input_in_field(OrderFirstPageLocators.SURNAME_FIELD, surname)
 
     def input_address(self, address):
-        self.driver.find_element(*self.address_field).send_keys(address)
+        self.input_in_field(OrderFirstPageLocators.ADDRESS_FIELD, address)
 
     def select_metro(self, metro):
         method, locator = self.metro_selection_item
         locator = locator.format(metro)
-        self.driver.find_element(*self.metro_selection_field).click()
-        self.driver.find_element(method, locator).click()
+        element = [method, locator]
+        self.click_on_element(OrderFirstPageLocators.METRO_SELECTION_FIELD)
+        self.click_on_element(element)
 
     def input_phone(self, phone):
-        self.driver.find_element(*self.phone_field).send_keys(phone)
+        self.input_in_field(OrderFirstPageLocators.PHONE_FIELD, phone)
 
     def click_next_button(self):
-        self.driver.find_element(*self.order_next_button).click()
+        self.click_on_element(OrderFirstPageLocators.ORDER_NEXT_BUTTON)
 
     def fill_out_form(self, name, surname, address, metro, phone):
         self.input_name(name)
