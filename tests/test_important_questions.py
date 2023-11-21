@@ -1,6 +1,6 @@
 from pages.start_page import StartPage
 import pytest
-from tests.data import DataForTests
+from data import DataForTests
 
 
 class TestImportantReplies:

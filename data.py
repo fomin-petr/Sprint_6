@@ -11,3 +11,8 @@ class DataForTests:
                    ]
     data_set = [["Марк", "Твен", "Москва", "Орехово", "79999999999", "сутки", "black", ""],
                 ["Фенимор", "Купер", "Подольск", "Сокольники", "79001236666", "двое суток", "grey", "комментарий"]]
+
+
+class Urls:
+    start_page = 'https://qa-scooter.praktikum-services.ru/'
+    order_page = 'https://qa-scooter.praktikum-services.ru/order'
