@@ -1,0 +1,1 @@
+{"uuid": "3c36ce85-8162-42ad-b737-bd27008d146f", "children": ["f8da9bd8-b1c2-45c7-9a21-0033c0d1811b"], "befores": [{"name": "scooter_page", "status": "passed", "start": 1700118511921, "stop": 1700118518638}], "afters": [{"name": "scooter_page::0", "status": "passed", "start": 1700118519084, "stop": 1700118521711}], "start": 1700118511921, "stop": 1700118521711}
